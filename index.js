@@ -8,12 +8,7 @@ const Intern = require('./lib/intern');
 
 const teamRoster = [];
 //prompts
-function addMember() {
-    const newEmployee = new Employee (
-        name,
-        id,
-        email,
-    )
+function addMember() {  
     inquirer
     .prompt ([
         {
@@ -38,19 +33,21 @@ function addMember() {
             choices: ['manager', 'engineer', 'intern'],
         },
     ])
+    .then((data) => {
+        console.log(data)
         if (data.role === 'manager') {
-        addManager(newEmployee)
+        addManager(data)
         }
         else if (data.role === 'engineer') {
-        addEngineer(newEmployee)
+        addEngineer(data)
         }
         else if (data.role === 'intern') {
-        addIntern(newEmployee)
+        addIntern(data)
         }
-};
+})};
 
 // Prompt functions for each team member role
-function addManager(newEmployee) {
+function addManager(data) {
     inquirer
     .prompt([
     {
@@ -66,9 +63,9 @@ function addManager(newEmployee) {
     },
     ])
     const newManager = new Manager(
-        newEmployee.name,
-        newEmployee.id,
-        newEmployee.email,
+        data.name,
+        data.id,
+        data.email,
         data.officeNumber,
     )
     teamRoster.push(newManager)
@@ -81,7 +78,7 @@ function addManager(newEmployee) {
     }
 };
 
-function addEngineer(newEmployee) {
+function addEngineer(data) {
     inquirer
     .prompt([
     {
@@ -97,9 +94,9 @@ function addEngineer(newEmployee) {
     }, 
     ])
     const newEngineer = new Engineer(
-        newEmployee.name,
-        newEmployee.id,
-        newEmployee.email,
+        data.name,
+        data.id,
+        data.email,
         data.github
     )
     teamRoster.push(newEngineer)
@@ -112,7 +109,7 @@ function addEngineer(newEmployee) {
     }
 };
 
-function addIntern(newEmployee) {
+function addIntern(data) {
     inquirer
     .prompt([
     {
@@ -128,9 +125,9 @@ function addIntern(newEmployee) {
     }, 
 ])
     const newIntern = new Intern(
-        newEmployee.name,
-        newEmployee.id,
-        newEmployee.email,
+        data.name,
+        data.id,
+        data.email,
         data.school
     )
     if (data.employee === 'Add New Member') {
